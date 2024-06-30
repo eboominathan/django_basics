@@ -1,9 +1,10 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<h1>Home</h1>
+<h1>Home Template</h1>
 
 <div>
+    <a href="{% url 'create-room' %}">Create Room</a>
     <div>
         {% for room in rooms%}
             <div>
