@@ -35,7 +35,7 @@ def loginPage(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.errors(request, 'Username or Password doesnot exists')
+            messages.error(request, 'Username or Password doesnot exists')
 
     context = {'page': page}
     return render(request, 'base/login_register.html', context)
@@ -70,8 +70,10 @@ def home(request):
 
     )
     topics = Topic.objects.all()
+    rooms_count = rooms.count()
+    room_messages = Message.objects.filter(Q(room__topic__name__icontains=q))
 
-    context = {'rooms': rooms, 'topics': topics}
+    context = {'rooms': rooms, 'topics': topics,'rooms_count':rooms_count,'room_messages':room_messages}
     return render(request, 'base/home.html', context)
 
 
