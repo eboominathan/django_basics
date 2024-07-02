@@ -113,8 +113,8 @@ def createRoom(request):  # -> tuple[Any, Literal['room_form.html'], dict]:
            room.host = request.user
            room.save()
            return redirect('home')
-
-    context = {'form': form}
+    topics = Topic.objects.all()
+    context = {'form': form,'topics':topics}
     return render(request, 'base/room_form.html', context)
 
 
@@ -130,8 +130,8 @@ def updateRoom(request, pk):
         if form.is_valid():
             form.save()
             return redirect('home')
-
-    context = {'form': form}
+    topics = Topic.objects.all()
+    context = {'form': form,'topics':topics}
     return render(request, 'base/room_form.html', context)
 
 
