@@ -186,7 +186,10 @@ def topicsPage(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     topics = Topic.objects.filter(
         name__icontains=q            
-    )
-    context = {'topics':topics}
-    return render(request, 'base/topics.html',context)
+    )    
+    return render(request, 'base/topics.html',{'topics':topics})
+
+def activityPage(request):
+    room_messages = Message.objects.all().order_by('-created')
+    return render(request,'base/activity.html',{'room_messages':room_messages})
     
